@@ -17,7 +17,7 @@ else
 fi
 
 echo "Installing dependencies"
-apt-get -y install openbox evilvte hsetroot x11-xserver-utils unclutter avahi-daemon imagemagick chkconfig xinit nodm watchdog
+apt-get -y install openbox evilvte hsetroot x11-xserver-utils unclutter avahi-daemon imagemagick chkconfig xinit nodm watchdog fbi xdotool
 
 echo "Creating screen user"
 useradd -m screen
@@ -61,5 +61,12 @@ echo "screen ALL=(ALL) NOPASSWD: /sbin/shutdown, /sbin/poweroff, /sbin/reboot" >
 
 # echo "Adding shutdown-menu entries"
 # FIXME: add openbox menu.xml with entries for shutdown & restart
+
+# boot image 
+# from http://www.edv-huber.com/index.php/problemloesungen/15-custom-splash-screen-for-raspberry-pi-raspbian
+echo "Setting boot screen"
+cp ./asplashscreen /etc/init.d/
+chmod a+x /etc/init.d/asplashscreen
+insserv /etc/init.d/asplashscreen
 
 echo "Assuming no errors were encountered, go ahead and restart the pi."

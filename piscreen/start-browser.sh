@@ -6,6 +6,7 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"
 HOSTNAME=`hostname`
 IPV4=`ip addr | sed -e's/^.*inet \([^ ]*\)\/.*$/\1/;t;d' | grep -v "127.0.0.1"`
 IPV6=`ip addr | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d' | grep -v "::1" | tr '\n' ' '`
+MAC=`ifconfig eth0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | tr -d ':'`
 
 HAS_NETWORK_CONNECTIFITY=0
 HAS_INTERNET_CONNECTIFITY=0
@@ -13,13 +14,21 @@ if [ -n "$IPV4" ] || [ -n "$IPV6" ]; then
   HAS_NETWORK_CONNECTIFITY=1
 fi
 
-ping -c1 8.8.8.8 > /dev/null
-if [ "$?" -eq 0 ]; then
-  HAS_INTERNET_CONNECTIFITY=1
-fi
+TRIES=10
+until [ $TRIES -eq 0 ] || [ "$HAS_INTERNET_CONNECTIFITY" -eq "1" ]; do
+  curl google.com > /dev/null
+  if [ "$?" -eq 0 ]; then
+    HAS_INTERNET_CONNECTIFITY=1
+  else
+      let TRIES-=1
+      echo Internet Tries Remaining: $TRIES
+      sleep 10
+  fi
+done
 
 echo "IPv4: $IPV4"
 echo "IPv6: $IPV6"
+echo "MAC: $MAC"
 echo "NET: $HAS_NETWORK_CONNECTIFITY"
 echo "WWW: $HAS_INTERNET_CONNECTIFITY"
 
@@ -49,7 +58,7 @@ if [ -e /boot/piscreen.txt ]; then
     if [ -z "$url" ]; then
       URLTOOPEN="no-url-in-config.html"
     else
-      URLTOOPEN="$url"
+      URLTOOPEN="$url?pid=$MAC&hn=$HOSTNAME"
     fi
   fi
 fi

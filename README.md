@@ -51,6 +51,8 @@ The difference to other signage-software like [Screeny OSE](https://github.com/w
 Insert the SD card in your regular computer and edit the `piscreen.txt` in the root folder of the SD card.
 Attention: You must not use spaces between the key, the = and the value.
 
+Add splash.png to the same folder if you want a boot image.
+
 ## 5. Test and run
 
 Insert the SD card back into the Raspberry Pi and power it on. It should now boot, open chrome in fullscreen with your desired URL.
