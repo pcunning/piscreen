@@ -48,7 +48,7 @@ The difference to other signage-software like [Screeny OSE](https://github.com/w
 
 ## 4. Fill your piscreen configuration
 
-Insert the SD card in your regular computer and edit the `piscreen.txt` in the root folder of the SD card.
+Insert the SD card in your regular computer and edit the `piscreen.txt` in the /boot folder of the SD card.
 Attention: You must not use spaces between the key, the = and the value.
 
 Add splash.png to the same folder if you want a boot image.
