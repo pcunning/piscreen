@@ -58,7 +58,7 @@ if [ -e /boot/piscreen.txt ]; then
     if [ -z "$url" ]; then
       URLTOOPEN="no-url-in-config.html"
     else
-      URLTOOPEN="$url?pid=$MAC&hn=$HOSTNAME"
+      URLTOOPEN="$url?ipv4=$IPV4&ipv6=$IPV6"
     fi
   fi
 fi
