@@ -8,17 +8,17 @@ IPV4=`ip addr | sed -e's/^.*inet \([^ ]*\)\/.*$/\1/;t;d' | grep -v "127.0.0.1"`
 IPV6=`ip addr | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d' | grep -v "::1" | tr '\n' ' '`
 MAC=`ifconfig eth0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | tr -d ':'`
 
-HAS_NETWORK_CONNECTIFITY=0
-HAS_INTERNET_CONNECTIFITY=0
+HAS_NETWORK_CONNECTIVITY=0
+HAS_INTERNET_CONNECTIVITY=0
 if [ -n "$IPV4" ] || [ -n "$IPV6" ]; then
-  HAS_NETWORK_CONNECTIFITY=1
+  HAS_NETWORK_CONNECTIVITY=1
 fi
 
 TRIES=10
-until [ $TRIES -eq 0 ] || [ "$HAS_INTERNET_CONNECTIFITY" -eq "1" ]; do
+until [ $TRIES -eq 0 ] || [ "$HAS_INTERNET_CONNECTIVITY" -eq "1" ]; do
   curl google.com > /dev/null
   if [ "$?" -eq 0 ]; then
-    HAS_INTERNET_CONNECTIFITY=1
+    HAS_INTERNET_CONNECTIVITY=1
   else
       let TRIES-=1
       echo Internet Tries Remaining: $TRIES
@@ -29,16 +29,16 @@ done
 echo "IPv4: $IPV4"
 echo "IPv6: $IPV6"
 echo "MAC: $MAC"
-echo "NET: $HAS_NETWORK_CONNECTIFITY"
-echo "WWW: $HAS_INTERNET_CONNECTIFITY"
+echo "NET: $HAS_NETWORK_CONNECTIVITY"
+echo "WWW: $HAS_INTERNET_CONNECTIVITY"
 
 # todo: create wallpaper, write connection details, set wallpaper
 
 URLTOOPEN=""
-if [ "$HAS_NETWORK_CONNECTIFITY" -eq "0" ]; then
+if [ "$HAS_NETWORK_CONNECTIVITY" -eq "0" ]; then
   URLTOOPEN="no-network-connection.html"
 fi
-if [ -z "$URLTOOPEN" ] && [ "$HAS_INTERNET_CONNECTIFITY" -eq "0" ]; then
+if [ -z "$URLTOOPEN" ] && [ "$HAS_INTERNET_CONNECTIVITY" -eq "0" ]; then
   URLTOOPEN="no-internet-connection.html"
 fi
 if [ -z "$URLTOOPEN" ]; then
