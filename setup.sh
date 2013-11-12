@@ -17,7 +17,7 @@ else
 fi
 
 echo "Installing dependencies"
-apt-get -y install openbox evilvte hsetroot x11-xserver-utils unclutter avahi-daemon imagemagick chkconfig xinit nodm watchdog fbi xdotool
+apt-get -y install openbox evilvte hsetroot x11-xserver-utils unclutter avahi-daemon imagemagick chkconfig xinit nodm watchdog fbi xdotool vim
 
 echo "Creating screen user"
 useradd -m screen
