@@ -2,7 +2,6 @@
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-HOSTNAME=`hostname`
 IPV4=`ip addr | sed -e's/^.*inet \([^ ]*\)\/.*$/\1/;t;d' | grep -v "127.0.0.1"`
 IPV6=`ip addr | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d' | grep -v "::1" | tr '\n' ' '`
 MAC=`ifconfig eth0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | tr -d ':'`
@@ -51,7 +50,7 @@ if [ -e /boot/piscreen.txt ]; then
     if [ -z "$url" ]; then
       URLTOOPEN="no-url-in-config.html"
     else
-      URLTOOPEN="$url?ipv4=$IPV4&ipv6=$IPV6"
+      URLTOOPEN="$url"
     fi
   fi
 fi
