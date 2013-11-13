@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "piscreen: start browser"
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
 HOSTNAME=`hostname`
@@ -20,17 +19,11 @@ until [ $TRIES -eq 0 ] || [ "$HAS_INTERNET_CONNECTIVITY" -eq "1" ]; do
   if [ "$?" -eq 0 ]; then
     HAS_INTERNET_CONNECTIVITY=1
   else
-      let TRIES-=1
-      echo Internet Tries Remaining: $TRIES
-      sleep 10
+    let TRIES-=1
+    echo Internet Tries Remaining: $TRIES
+    sleep 10
   fi
 done
-
-echo "IPv4: $IPV4"
-echo "IPv6: $IPV6"
-echo "MAC: $MAC"
-echo "NET: $HAS_NETWORK_CONNECTIVITY"
-echo "WWW: $HAS_INTERNET_CONNECTIVITY"
 
 # todo: create wallpaper, write connection details, set wallpaper
 
@@ -62,9 +55,6 @@ if [ -e /boot/piscreen.txt ]; then
     fi
   fi
 fi
-
-echo "Starting Chrome..."
-echo "URL: $URLTOOPEN"
 
 # using --incognito for ignoring session restore after a power loss
 chrome --noerrdialogs --disable-translate --disable-sync --incognito --kiosk "$URLTOOPEN" &
