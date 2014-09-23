@@ -1,9 +1,7 @@
 #!/bin/bash
 
-echo "piscreen: start browser"
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-HOSTNAME=`hostname`
 IPV4=`ip addr | sed -e's/^.*inet \([^ ]*\)\/.*$/\1/;t;d' | grep -v "127.0.0.1"`
 IPV6=`ip addr | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d' | grep -v "::1" | tr '\n' ' '`
 MAC=`ifconfig eth0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | tr -d ':'`
@@ -20,17 +18,11 @@ until [ $TRIES -eq 0 ] || [ "$HAS_INTERNET_CONNECTIVITY" -eq "1" ]; do
   if [ "$?" -eq 0 ]; then
     HAS_INTERNET_CONNECTIVITY=1
   else
-      let TRIES-=1
-      echo Internet Tries Remaining: $TRIES
-      sleep 10
+    let TRIES-=1
+    echo Internet Tries Remaining: $TRIES
+    sleep 10
   fi
 done
-
-echo "IPv4: $IPV4"
-echo "IPv6: $IPV6"
-echo "MAC: $MAC"
-echo "NET: $HAS_NETWORK_CONNECTIVITY"
-echo "WWW: $HAS_INTERNET_CONNECTIVITY"
 
 # todo: create wallpaper, write connection details, set wallpaper
 
@@ -58,13 +50,10 @@ if [ -e /boot/piscreen.txt ]; then
     if [ -z "$url" ]; then
       URLTOOPEN="no-url-in-config.html"
     else
-      URLTOOPEN="$url?pid=$MAC&hn=$HOSTNAME"
+      URLTOOPEN="$url?mac=$MAC"
     fi
   fi
 fi
-
-echo "Starting Chrome..."
-echo "URL: $URLTOOPEN"
 
 # using --incognito for ignoring session restore after a power loss
 chrome --noerrdialogs --disable-translate --disable-sync --incognito --kiosk "$URLTOOPEN" &
