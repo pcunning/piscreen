@@ -17,7 +17,7 @@ else
 fi
 
 echo "Installing dependencies"
-apt-get -y install openbox evilvte hsetroot x11-xserver-utils unclutter avahi-daemon imagemagick chkconfig xinit nodm watchdog fbi xdotool vim
+apt-get -y install openbox evilvte hsetroot x11-xserver-utils unclutter avahi-daemon imagemagick chkconfig xinit nodm watchdog fbi xdotool vim chromium
 
 echo "Creating screen user"
 useradd -m screen
@@ -38,10 +38,6 @@ sed -e 's/#watchdog-device/watchdog-device/g' -i /etc/watchdog.conf
 echo "Adding piscreen config-file"
 cp ./screen/piscreen.example.txt /boot/piscreen.txt
 chmod ugo+r /boot/piscreen.txt
-
-echo "Installing Google Chrome"
-bash <(curl -sL http://distribution-us.hexxeh.net/chromium-rpi/install.sh)
-update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/chrome 100
 
 echo "Creating openbox autostart"
 mkdir /home/screen/.config
