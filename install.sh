@@ -11,7 +11,7 @@ apt-get install -y git-core
 
 #clone the project directory
 echo "Pulling the project directory"
-git clone https://github.com/pcunning/piscreen.git ./screen
+git clone https://github.com/ZaneMiller/piscreen.git ./screen
 
 #configure the example script
 echo "Configuring the display url"
