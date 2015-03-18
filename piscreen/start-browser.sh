@@ -67,7 +67,7 @@ if [ -e /boot/piscreen.txt ]; then
 	if [ -z "$url" ]; then
 		URL_TO_OPEN="no-url-in-config.html"
 	else
-		URL_TO_OPEN="$url?mac=$MAC"	
+		URL_TO_OPEN="$url?pid=$MAC"	
 	fi
 fi
 
