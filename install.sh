@@ -23,7 +23,7 @@ echo "Running setup"
 
 #remove the cloned directory
 echo "Cleaning up"
-rm -R screen
+rm -f -R screen
 
 echo "Done!"
 echo "You may add a startup image at /boot/splash.png"
