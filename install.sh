@@ -27,5 +27,5 @@ echo "Cleaning up"
 rm -f -R screen
 
 echo "Done!"
-echo "You may add a startup image at /boot/splash.png"
+echo "You may add a startup image at /etc/splash.png"
 echo "If there were no errors, restart the pi to complete the setup."

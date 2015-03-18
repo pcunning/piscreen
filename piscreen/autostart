@@ -5,7 +5,7 @@ xset -dpms         # disable DPMS (Energy Star) features.
 xset s noblank     # don't blank the video device
 
 if [ -f /boot/splash.png ]; then
-	hsetroot -fill /boot/splash.png &
+	hsetroot -fill /etc/splash.png &
 fi
 unclutter &
 /home/screen/piscreen/start-browser.sh &
