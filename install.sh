@@ -15,7 +15,8 @@ git clone https://github.com/ZaneMiller/piscreen.git ./screen
 
 #configure the example script
 echo "Configuring the display url"
-sed -e "s/url=.*$/url=$1" -i ./screen/piscreen.example.txt
+URL=${1//"/"/"\/"}
+sed -e "s/url=.*$/url=$URL/g" -i ./screen/piscreen.example.txt
 
 #run the setup
 echo "Running setup"
