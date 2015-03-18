@@ -18,7 +18,7 @@ else
 fi
 
 echo "Installing dependencies"
-apt-get -y install openbox evilvte hsetroot x11-xserver-utils unclutter avahi-daemon imagemagick chkconfig xinit nodm watchdog fbi xdotool vim chromium
+apt-get -y install openbox hsetroot x11-xserver-utils unclutter imagemagick chkconfig xinit nodm watchdog fbi xdotool chromium
 
 echo "Creating screen user"
 useradd -m screen
@@ -44,8 +44,15 @@ echo "Creating openbox autostart"
 mkdir /home/screen/.config
 mkdir /home/screen/.config/openbox
 touch /home/screen/.config/openbox/autostart
-echo "~/piscreen/autostart &" >> /home/screen/.config/openbox/autostart
+if ! grep -qe "^/home/screen/piscreen/autostart &$" "/home/screen/.config/openbox/autostart"; then
+	echo "/home/screen/piscreen/autostart &" >> /home/screen/.config/openbox/autostart
+fi
 chown -R screen /home/screen/.config
+
+echo "Creating .xsession"
+cp ./screen/xsession-example /home/screen/.xsession
+chown screen /home/screen/.xsession
+chmod +x /home/screen/.xsession
 
 echo "Copying piscreen files"
 cp -r ./screen/piscreen /home/screen/
@@ -62,7 +69,7 @@ echo "screen ALL=(ALL) NOPASSWD: /sbin/shutdown, /sbin/poweroff, /sbin/reboot" >
 # boot image 
 # from http://www.edv-huber.com/index.php/problemloesungen/15-custom-splash-screen-for-raspberry-pi-raspbian
 echo "Setting boot screen"
-cp ./asplashscreen /etc/init.d/
+cp ./screen/asplashscreen /etc/init.d/
 chmod a+x /etc/init.d/asplashscreen
 insserv /etc/init.d/asplashscreen
 

@@ -4,6 +4,8 @@ xset s off         # don't activate screensaver
 xset -dpms         # disable DPMS (Energy Star) features.
 xset s noblank     # don't blank the video device
 
-hsetroot -fill /boot/splash.png &
+if [ -f /boot/splash.png ]; then
+	hsetroot -fill /boot/splash.png &
+fi
 unclutter &
-~/piscreen/start-browser.sh &
+/home/screen/piscreen/start-browser.sh &
