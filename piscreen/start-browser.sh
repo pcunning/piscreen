@@ -72,10 +72,4 @@ if [ -e /boot/piscreen.txt ]; then
 fi
 
 #Start Epiphany with our determined URL
-epiphany-browser --display=:0 -p "$URL_TO_OPEN" &> /dev/null &
-
-#Give the browser a few seconds to start
-sleep 10
-
-#Emulate pressing F11 to put the browser into full-screen
-xdotool key F11
+chromium --noerrdialogs --disable-translate --disable-sync --incognito --kiosk "$URL_TO_OPEN" &>/dev/null &
