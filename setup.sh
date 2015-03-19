@@ -22,6 +22,7 @@ apt-get -y install openbox hsetroot x11-xserver-utils unclutter imagemagick chkc
 
 echo "Creating screen user"
 useradd -m screen
+usermod -a -G video screen
 
 echo "Installing nodm auto login"
 sed -e 's/NODM_ENABLED=.*$/NODM_ENABLED=true/g' -i /etc/default/nodm
