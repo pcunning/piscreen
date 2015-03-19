@@ -71,5 +71,12 @@ if [ -e /boot/piscreen.txt ]; then
 	fi
 fi
 
-#Start Epiphany with our determined URL
-chromium --noerrdialogs --disable-translate --disable-sync --incognito --kiosk "$URL_TO_OPEN" &>/dev/null &
+#Tell X to start again (it will quit immediately) to rid the screen of the odd black box
+#in the upper left corner
+startx --help &> /dev/null
+
+#Start Chrome with our determined URL
+while true; do
+	chromium --noerrdialogs --disable-translate --disable-sync --incognito --kiosk "$URL_TO_OPEN" &>/dev/null
+	sleep 10
+done
