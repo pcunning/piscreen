@@ -4,7 +4,7 @@ xset s off         # don't activate screensaver
 xset -dpms         # disable DPMS (Energy Star) features.
 xset s noblank     # don't blank the video device
 
-if [ -f /boot/splash.png ]; then
+if [ -f /etc/splash.png ]; then
 	hsetroot -fill /etc/splash.png &
 fi
 xdotool mousemove 0 0
