@@ -7,5 +7,6 @@ xset s noblank     # don't blank the video device
 if [ -f /boot/splash.png ]; then
 	hsetroot -fill /etc/splash.png &
 fi
+xdotool mousemove 0 0
 unclutter &
 /home/screen/piscreen/start-browser.sh &
