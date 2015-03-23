@@ -2,9 +2,6 @@
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-touch /boot/piscreen_running.txt
-echo "I am running." > /boot/piscreen_running.txt
-
 #Get the needed network configuration information
 IPV4=`ip addr | sed -e's/^.*inet\([^ ]*\)\/.*$/\1/;t;d' | grep -v "127.0.0.1"`
 IPV6=`ip addr | sed -e's/^.*inet6\([^ ]*\)\/.*$/\1/;t;d' | grep -v "::1" | tr '\n' ' '`
@@ -38,8 +35,6 @@ until [[ $? -eq 0 ]]; do
 	#Check the internet connection
 	wget -q --tries=1 --timeout=$TIMEOUT --spider $TEST_URL
 done
-
-echo "Done testing connection"
 
 #If Chrome was started, kill it
 if [ $CHROME_RUNNING -eq 1 ]; then
