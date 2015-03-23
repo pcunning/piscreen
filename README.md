@@ -8,10 +8,9 @@ The difference to other signage-software like [Screeny OSE](https://github.com/w
 # Installation
 ## 1. Preparing the SD card
 
-1. Get the latest [MoebiusLinux](http://moebiuslinux.sourceforge.net/) for your Raspberry Pi and write it to the SD card with dd (on Linux & Mac):
+1. Get the latest [Rasbpian](http://www.raspberrypi.org/downloads/) for your Raspberry Pi and write it to the SD card with dd (on Linux & Mac):
 
-        tar -zxvf moebius.minimal.image.1.0.1.tar.gz
-        dd bs=1M if=moebius.minimal.image of=/dev/sdX
+        dd bs=1M if=raspbian.img of=/dev/sdX
 
   You can also write to the SD card with [Win32DiskImager](https://wiki.ubuntu.com/Win32DiskImager) if you are using Windows. 
 
@@ -19,7 +18,7 @@ The difference to other signage-software like [Screeny OSE](https://github.com/w
 
 ## 2. Basic (manual) Updating & Configuration
 
-1. Log in as *root* with the Password: *raspi*. If the password doesn't work look in the [Moebius FAQ](http://moebiuslinux.sourceforge.net/documentation/faq/).
+1. Log in as *pi* with the Password: *raspberry*. If the password doesn't work look in the [Pi FAQ](http://www.raspberrypi.org/help/quick-start-guide/).
 
 2. A basic auto-configuration tool should appear (if not, start `raspi-config`). 
   
@@ -32,28 +31,19 @@ The difference to other signage-software like [Screeny OSE](https://github.com/w
 
   If a conflict happens for any file press `Y`.
 
-4. Change the password of root: `passwd`
-
-5. Reboot the Pi: `reboot`
+4. Reboot the Pi: `reboot`
 
 ## 3. Setup the automatic installation
 
-1. Login again as *root* with your new password.
+1. Login again as *pi*.
 
-2. Install Git: `apt-get install git-core`
+2. Run the automatic installer: `wget https://raw.githubusercontent.com/ZaneMiller/piscreen/master/install.sh && sudo bash ./install.sh [default url]` *NOTE:* You must replace `[default url]` with the url the display should launch to.
 
-3. Checkout the files of this repo: `git clone https://github.com/uhds/piscreen.git ./screen`
+3. After the installation is complete check to make sure there were no errors. If you wish to add a splash screen add the image to `/etc/splash.png`.
 
-4. Run the automatic installer: `bash screen/setup.sh`
+4. Assuming no errors occured you may restart the Pi.
 
-## 4. Fill your piscreen configuration
-
-Insert the SD card in your regular computer and edit the `piscreen.txt` in the /boot folder of the SD card.
-Attention: You must not use spaces between the key, the = and the value.
-
-Add splash.png to the same folder if you want a boot image.
-
-## 5. Test and run
+## 4. Test and run
 
 Insert the SD card back into the Raspberry Pi and power it on. It should now boot, open chrome in fullscreen with your desired URL.
 
@@ -62,7 +52,6 @@ To shutdown it nicely, press `ALT+F4`, rightclick, choose *Terminal* and enter `
 # Todo
 
 * Read the hostname from `piscreen.txt` and set it on boot.
-* Add a wallpaper, overlay start-time, hostname and current ip
 * Support proxies
 * Add nicer shutdown button
 
@@ -71,5 +60,3 @@ To shutdown it nicely, press `ALT+F4`, rightclick, choose *Terminal* and enter `
 [Screeny OSE](https://github.com/wireload/screenly-ose) and the [Raspberry Pi forums](http://www.raspberrypi.org/forum) for the inspiration.
 
 [hexxeh](http://hexxeh.net) for the [RPi Binaries of Chromium](http://hexxeh.net/?p=328117859).
-
-ben for [Moebius Linux](http://moebiuslinux.sourceforge.net), a minimal installation of [Raspbian](http://raspbian.org).
